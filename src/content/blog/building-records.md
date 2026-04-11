@@ -1,13 +1,21 @@
-# 个人博客搭建
+---
+title: '个人博客搭建记录'
+description: '搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端'
+pubDate: 'april 11 2025'
+heroImage: '../../assets/building-records.jpeg'
+---
 > 搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端
+>
 
 ## 技术选型
+---
 
 + 前端 Node.js 框架：Astro
 + 代码托管：GitHub
 + 网站自动部署：Vercel
 
 ## 开始部署
+---
 
 ```bash
 # 使用 npm 创建
@@ -94,4 +102,92 @@ git push -u origin main
 >
 
 ## 项目优化
-请前往[项目搭建记录](./src/content/blog/building-records.md)查看
+### 添加新博客
+在`/src/pages/blog/`下拷贝`md`文档，在`src/assets/`下引用图片和字体等元素
+
+### `.astro`文件
+1. 编写 Astro 模板非常像编写 HTML，但你可以在其中加入 JavaScript 表达式。
+2. Astro 的 frontmatter 脚本只包含 JavaScript。
+3. 你可以在你的 .astro 文件的任何部分使用所有现代的 JavaScript 逻辑运算符、表达式和函数。但是，大括号仅在 HTML 模板主体中是必要的。
+
+```html
+---
+// 此处为frontmatter栏，可以在组件的前面使用脚本标签来定义变量和使用 JavaScript 表达式。
+// 导入外部资源
+// import '../styles/global.css';
+
+// 定义变量
+const pageTitle = "测试页";
+
+// 使用 JS 表达式
+const identity = {
+    firstName: "莎拉",
+    country: "加拿大",
+    occupation: "技术撰稿人",
+    hobbies: ["摄影", "观鸟", "棒球"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "crimson";
+---
+
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{pageTitle}</title>
+        
+        <!-- 在单页面使用 CSS 样式-->
+        <!-- 使用 define:vars={ {...} } 指令引用 frontmatter 中的任何变量 -->
+        <style define:vars={{skillColor}}>
+            .skill {
+                /* 在样式标签中（即此处）用作 CSS 变量使用 */
+                color: var(--skillColor);
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <p>以下是关于我的几个事实：</p>
+        <ul>
+            <!-- 在 astro 使用 JS 表达式 -->
+            <li>我的名字是{identity.firstName}.</li>
+            <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
+            {
+                identity.hobbies.length >= 2 && (
+                    <li>
+                        我的两个习惯：{identity.hobbies[0]}和
+                        {identity.hobbies[1]}
+                    </li>
+                )
+            }
+        </ul>
+        {happy && <p>我非常乐意学习 Astro！</p>}
+
+        {finished && <p>我完成了这节教程！</p>}
+
+        {
+            // 使用三元表达式 / 条件渲染元素
+            goal === 3 ? (
+                <p>我的目标是在三天内完成。</p>
+            ) : (
+                <p>我的目标不是 3 天。</p>
+            )
+        }
+        <p>我的技能：</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+    </body>
+</html>
+```
+
+### todo
++ 跟换字体
++ 优化行间距
++ 代码块和字体过大

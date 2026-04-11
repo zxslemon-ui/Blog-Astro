@@ -1,0 +1,78 @@
+---
+// 此处为frontmatter栏，可以在组件的前面使用脚本标签来定义变量和使用 JavaScript 表达式。
+// 导入外部资源
+// import '../styles/global.css';
+
+// 定义变量
+const pageTitle = "测试页";
+
+// 使用 JS 表达式
+const identity = {
+    firstName: "莎拉",
+    country: "加拿大",
+    occupation: "技术撰稿人",
+    hobbies: ["摄影", "观鸟", "棒球"],
+};
+
+const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
+
+const happy = true;
+const finished = false;
+const goal = 3;
+
+const skillColor = "crimson";
+---
+
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width" />
+        <title>{pageTitle}</title>
+        
+        <!-- 在单页面使用 CSS 样式-->
+        <!-- 使用 define:vars={ {...} } 指令引用 frontmatter 中的任何变量 -->
+        <style define:vars={{skillColor}}>
+            h1 {
+                color: purple;
+                font-size: 4rem;
+            }
+            .skill {
+                /* 在样式标签中（即此处）用作 CSS 变量使用 */
+                color: var(--skillColor);
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <body>
+        <p>以下是关于我的几个事实：</p>
+        <ul>
+            <!-- 在 astro 使用 JS 表达式 -->
+            <li>我的名字是{identity.firstName}.</li>
+            <li>我住在{identity.country}。我的职业是{identity.occupation}。</li>
+            {
+                identity.hobbies.length >= 2 && (
+                    <li>
+                        我的两个习惯：{identity.hobbies[0]}和
+                        {identity.hobbies[1]}
+                    </li>
+                )
+            }
+        </ul>
+        {happy && <p>我非常乐意学习 Astro！</p>}
+
+        {finished && <p>我完成了这节教程！</p>}
+
+        {
+            // 使用三元表达式 / 条件渲染元素
+            goal === 3 ? (
+                <p>我的目标是在三天内完成。</p>
+            ) : (
+                <p>我的目标不是 3 天。</p>
+            )
+        }
+        <p>我的技能：</p>
+        <ul>
+            {skills.map((skill) => <li class="skill">{skill}</li>)}
+        </ul>
+    </body>
+</html>
