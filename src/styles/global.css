@@ -17,7 +17,8 @@
 		0 16px 32px rgba(var(--gray), 33%);
 }
 body {
-	font-family: var(--font-atkinson);
+	font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+	 	"Noto Sans SC", "Source Han Sans SC", sans-serif;
 	margin: 0;
 	padding: 0;
 	text-align: left;
@@ -26,8 +27,8 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 16px;
+	line-height: 2;
 }
 main {
 	width: 720px;
@@ -110,7 +111,7 @@ blockquote {
 	border-left: 4px solid var(--accent);
 	padding: 0 0 0 20px;
 	margin: 0;
-	font-size: 1.333em;
+	font-size: 1em;
 }
 hr {
 	border: none;

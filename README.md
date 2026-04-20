@@ -7,6 +7,13 @@
 + 代码托管：GitHub
 + 网站自动部署：Vercel
 
+## 主要技术栈
++ Astro (v6.1.5)：核心框架，用于静态站点生成和组件化开发
++ @astrojs/mdx：支持在 Markdown 中嵌入组件
++ @astrojs/rss 和 @astrojs/sitemap：自动生成 RSS 订阅和站点地图
++ Sharp：图像优化
++ TypeScript：类型安全配置
+
 ## 开始部署
 
 ```bash
@@ -71,7 +78,7 @@ npm create astro@latest -- --template blog
 
 ### 上传至 GitHub
 #### 创建 GitHub 项目仓库
-此步骤略过。。。
+此步骤略过
 
 #### 本地 push 至 GitHub 云端
 ```bash

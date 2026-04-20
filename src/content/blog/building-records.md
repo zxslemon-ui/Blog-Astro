@@ -1,7 +1,7 @@
 ---
 title: '个人博客搭建记录'
 description: '搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端'
-pubDate: 'april 11 2025'
+pubDate: 'april 11 2026'
 heroImage: '../../assets/building-records.jpeg'
 ---
 > 搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端
@@ -13,6 +13,13 @@ heroImage: '../../assets/building-records.jpeg'
 + 前端 Node.js 框架：Astro
 + 代码托管：GitHub
 + 网站自动部署：Vercel
+
+## 主要技术栈
++ Astro (v6.1.5)：核心框架，用于静态站点生成和组件化开发
++ @astrojs/mdx：支持在 Markdown 中嵌入组件
++ @astrojs/rss 和 @astrojs/sitemap：自动生成 RSS 订阅和站点地图
++ Sharp：图像优化
++ TypeScript：类型安全配置
 
 ## 开始部署
 ---
@@ -79,7 +86,7 @@ npm create astro@latest -- --template blog
 
 ### 上传至 GitHub
 #### 创建 GitHub 项目仓库
-此步骤略过。。。
+此步骤略过
 
 #### 本地 push 至 GitHub 云端
 ```bash
@@ -187,7 +194,28 @@ const skillColor = "crimson";
 </html>
 ```
 
+### 跟换字体、字体大小和行间距
++ astro.config.mjs：移除了自定义Atkinson字体配置。
++ global.css：更新body的font-family为新字体栈。
++ 将 body 的 line-height 从 1.7 改为 2
++ 将正文字体大小从20px调整为16px。现在所有正文（包括段落、引用等）将使用16px字体。
+
+```css
+font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei",
+	 	"Noto Sans SC", "Source Han Sans SC", sans-serif;
+
+/* 标题大小会按比例缩小（基于rem单位）：
+● h1: 36px（之前45px）
+● h2: 28px（之前35px）
+● h3: 24px（之前30px）
+● h4: 20px（之前25px）
+● h5: 17.6px（之前22px）*/
+font-size: 16px;
+
+line-height: 2;
+```
+
 ### todo
-+ 跟换字体
-+ 优化行间距
-+ 代码块和字体过大
++ 上传新博客
++ 更换`home`主页页面
++ 设计`about`页面
