@@ -2,7 +2,7 @@
 title: '个人博客搭建记录'
 description: '搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端'
 pubDate: 'april 11 2026'
-heroImage: '../../assets/building-records.jpeg'
+heroImage: '../../assets/blog/building-records.jpeg'
 ---
 > 搭建半自动化平台，在本地完成 MD 文档编写并上传后，自动部署至 Web 端
 >
@@ -109,10 +109,11 @@ git push -u origin main
 >
 
 ## 项目优化
-### 添加新博客
+### 2026.4.11
+#### 添加新博客
 在`/src/pages/blog/`下拷贝`md`文档，在`src/assets/`下引用图片和字体等元素
 
-### `.astro`文件
+#### `.astro`文件
 1. 编写 Astro 模板非常像编写 HTML，但你可以在其中加入 JavaScript 表达式。
 2. Astro 的 frontmatter 脚本只包含 JavaScript。
 3. 你可以在你的 .astro 文件的任何部分使用所有现代的 JavaScript 逻辑运算符、表达式和函数。但是，大括号仅在 HTML 模板主体中是必要的。
@@ -194,7 +195,8 @@ const skillColor = "crimson";
 </html>
 ```
 
-### 跟换字体、字体大小和行间距
+### 2026.4.20
+#### 跟换字体、字体大小和行间距
 + astro.config.mjs：移除了自定义Atkinson字体配置。
 + global.css：更新body的font-family为新字体栈。
 + 将 body 的 line-height 从 1.7 改为 2
@@ -215,7 +217,62 @@ font-size: 16px;
 line-height: 2;
 ```
 
+### 2026.4.21
+#### 优化行间距
+```plain
+prompt：我现在写的md文件在网页上显示的很奇怪，主要问题是行间距不一致，
+比如二级标题与三级标题的间距过窄等问题，段落与段落见的间隔过大
+（可能还有其它显示方面的问题，请都帮我优化一下）。结合整个项目样式设计进行优化
+```
+
+优化结果：
+
+```plain
+已完成排版优化。主要改进：
+
+全局样式优化（global.css）：
+
+行间距：从 2 改为 1.75，阅读体验更舒适
+标题间距：各级标题设置不同的 margin-top/bottom，确保层级感清晰
+h2/h3 间距加大，避免挤在一起
+h1 单独调整，减少顶部间距
+段落间距：.prose p 从 2em 改为 1.3em，避免过宽
+引用块：添加垂直 padding 和外间距，字体变灰色，更有层次感
+分隔线：添加上下 2em 间距，与文本区分
+博客样式优化（BlogPost.astro）：
+
+列表：添加合理的 margin 和 padding
+列表项：item 间添加 0.5em 间距
+代码块和表格：添加 1.5em 外间距，与正文分离
+刷新页面查看效果，MD 文件在网页上的显示应该更加协调美观，各元素层级清晰。
+```
+
+#### 修改默认显示图片
+`import FallbackImage from '../assets/fallback.png';`
+
+这个 `FallbackImage` 是用作社交媒体分享的默认缩略图。
+
+具体作用：
+
+1. 默认值：在 BaseHead.astro 中：
+
+当博客文章没有提供 `image` 属性时，就使用这个默认图片。
+
+2. 社交分享：这个图片用于 Open Graph 和 Twitter 的 meta 标签：
+
+当用户把文章分享到社交媒体（如微博、Twitter、Facebook）时，这个图片会作为缩略图展示。
+
+3. 优化用户体验：确保分享到社交媒体时，即使博客文章没有配置封面图，也能显示一个默认的、美观的缩略图，而不是空白。
+
+总结：这是一个后备方案（fallback），保证每篇文章在社交媒体上分享时都有相应的缩略图展示。
+
+#### 清除多余页面
+优化主页
+
+删除多余博客模板
+
 ### todo
-+ 上传新博客
++ 引入新模板
++ 优化`html-study`博客页面
 + 更换`home`主页页面
 + 设计`about`页面

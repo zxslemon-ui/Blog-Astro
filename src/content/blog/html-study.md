@@ -1,8 +1,8 @@
 ---
 title: 'HTML 语法学习'
 description: '学习 HTML 基础语法'
-pubDate: 'april 21 2026'
-heroImage: '../../assets/html-study.jpeg'
+pubDate: 'april 8 2026'
+heroImage: '../../assets/blog/html-study.jpeg'
 ---
 ## HTML简介
 ## HTML基础语法
